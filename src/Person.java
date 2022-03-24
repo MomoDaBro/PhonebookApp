@@ -1,9 +1,9 @@
 public class Person {
 
-    final String name;
-    final String number;
-    final String address;
-    final int age;
+    public String name;
+    public String number;
+    public String address;
+    public int age;
 
     public Person(String name, String number, String address, int age) {
         this.name = name;
