@@ -1,3 +1,7 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+
 public class Person {
 
     public String name;
@@ -22,13 +26,11 @@ public class Person {
                 '}';
     }
 
-    public String greeting(){
-        return "Hello my name is " + name;
+    public static Person parsePerson(String line) {
+        String[] tokens = line.split(":");
+        return new Person(tokens[0],tokens[1],tokens[2],Integer.parseInt(tokens[3]));
     }
-    public String contact(){
-        return "My number is " + number;
-    }
-
 }
+
 
 

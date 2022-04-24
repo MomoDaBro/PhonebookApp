@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,17 +9,11 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        List<Person> phonebook = new ArrayList<>();
-
-        Person p1 = new Person("PersonA", "12345", "address1", 15);
-        Person p2 = new Person("PersonB", "67890", "address2", 25);
-        Person p3 = new Person("PersonC", "98765", "address3", 20);
-
-        phonebook.add(p1);
-        phonebook.add(p2);
-        phonebook.add(p3);
+        List<Person> phonebook = Files.lines(Paths.get("phonebook.txt"))
+                .map(Person::parsePerson)
+                .collect(Collectors.toList());
 
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -37,6 +34,7 @@ public class Main {
             }
         }
     }
+
 
     private static void updateContact(List<Person> phonebook, Scanner scanner) {
         List<Person> filteredList = findPeople(phonebook, scanner);
@@ -108,6 +106,7 @@ public class Main {
         Person newPerson = new Person(name, number, address, age);
         phonebook.add(newPerson);
         System.out.println("done");
+
     }
 
     private static void printPeople(List<Person> phonebook) {
